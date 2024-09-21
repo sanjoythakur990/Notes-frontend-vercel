@@ -17,8 +17,7 @@ const App = () => {
     const fetchNotes = async () => {
         try {
             // const response = await axios.get('http://localhost:8000/notes');
-            const response = await axios.get('https://notes-backend-render-m03s.onrender.com/notes');
-            
+            const response = await axios.get(`${process.env.REACT_APP_MY_DEPLOYED_BACKEND_LINK}/notes`);
             setNotes(response.data);
         } catch (error) {
             console.error('Error fetching notes:', error);
@@ -34,10 +33,10 @@ const App = () => {
         try {
             if (currentNote) {
                 // await axios.put(`http://localhost:8000/notes/${currentNote.id}`, note);
-                await axios.put(`https://notes-backend-render-m03s.onrender.com/${currentNote.id}`, note);
+                await axios.put(`${process.env.REACT_APP_MY_DEPLOYED_BACKEND_LINK}/notes/${currentNote.id}`, note);
             } else {
                 // await axios.post('http://localhost:8000/notes', note);
-                await axios.post('https://notes-backend-render-m03s.onrender.com/notes', note);
+                await axios.post(`${process.env.REACT_APP_MY_DEPLOYED_BACKEND_LINK}/notes`, note);
             }
             fetchNotes();
             closeModal();
@@ -49,7 +48,7 @@ const App = () => {
     const deleteNote = async (id) => {
         try {
             // await axios.delete(`http://localhost:8000/notes/${id}`);
-            await axios.delete(`https://notes-backend-render-m03s.onrender.com/${id}`);
+            await axios.delete(`${process.env.REACT_APP_MY_DEPLOYED_BACKEND_LINK}/notes/${id}`);
             fetchNotes();
         } catch (error) {
             console.error('Error deleting note:', error);
