@@ -16,7 +16,9 @@ const App = () => {
 
     const fetchNotes = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/notes');
+            // const response = await axios.get('http://localhost:8000/notes');
+            const response = await axios.get('https://notes-backend-render-m03s.onrender.com/notes');
+            
             setNotes(response.data);
         } catch (error) {
             console.error('Error fetching notes:', error);
@@ -31,9 +33,11 @@ const App = () => {
     const addOrEditNote = async (note) => {
         try {
             if (currentNote) {
-                await axios.put(`http://localhost:8000/notes/${currentNote.id}`, note);
+                // await axios.put(`http://localhost:8000/notes/${currentNote.id}`, note);
+                await axios.put(`https://notes-backend-render-m03s.onrender.com/${currentNote.id}`, note);
             } else {
-                await axios.post('http://localhost:8000/notes', note);
+                // await axios.post('http://localhost:8000/notes', note);
+                await axios.post('https://notes-backend-render-m03s.onrender.com/notes', note);
             }
             fetchNotes();
             closeModal();
@@ -44,7 +48,8 @@ const App = () => {
 
     const deleteNote = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/notes/${id}`);
+            // await axios.delete(`http://localhost:8000/notes/${id}`);
+            await axios.delete(`https://notes-backend-render-m03s.onrender.com/${id}`);
             fetchNotes();
         } catch (error) {
             console.error('Error deleting note:', error);
