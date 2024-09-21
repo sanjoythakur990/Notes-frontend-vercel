@@ -82,7 +82,7 @@ const App = () => {
             </div>
             {
                 loadDone===true ? <NotesList notes={filteredNotes} onDelete={deleteNote} onEdit={openModal} /> : (<div class="loading-container">
-                <p>Please be patient while we load your notes. This might take a couple of minutes...</p>
+                <p>Please wait while we load your notes...</p>
                 <div class="spinner"></div>
               </div>) 
             }
