@@ -9,6 +9,7 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const [currentNote, setCurrentNote] = useState(null);
+    const [loadDone, setloadDone]= useState(false)
 
     useEffect(() => {
         fetchNotes();
@@ -18,6 +19,7 @@ const App = () => {
         try {
             // const response = await axios.get('http://localhost:8000/notes');
             const response = await axios.get(`${process.env.REACT_APP_MY_DEPLOYED_BACKEND_LINK}/notes`);
+            setloadDone(true);
             setNotes(response.data);
         } catch (error) {
             console.error('Error fetching notes:', error);
@@ -78,7 +80,13 @@ const App = () => {
                     className="search-input"
                 />
             </div>
-            <NotesList notes={filteredNotes} onDelete={deleteNote} onEdit={openModal} />
+            {
+                loadDone===true ? <NotesList notes={filteredNotes} onDelete={deleteNote} onEdit={openModal} /> : (<div class="loading-container">
+                <p>Please be patient while we load your notes. This might take a couple of minutes...</p>
+                <div class="spinner"></div>
+              </div>) 
+            }
+            
             {modalOpen && <NoteModal note={currentNote} onSave={addOrEditNote} onClose={closeModal} />}
         </div>
     );
